@@ -1,0 +1,12 @@
+
+    <mat-grid-list cols="5" rowHeight="2:1"><div *ngFor =" let tag of tags">
+        <mat-grid-tile>
+          <button mat-icon-button [routerLink]="['/tag/',tag.item]">
+            <mat-icon aria-setsize="50px">bookmark</mat-icon>
+          </button>
+            <strong class="title"><h3>{{tag.item}}&nbsp;</h3></strong>
+        </mat-grid-tile></div>
+       
+      </mat-grid-list>
+  
+    

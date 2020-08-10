@@ -1,0 +1,29 @@
+<h2 class="title">  <mat-icon aria-setsize="50px">bookmark</mat-icon> {{this.name}} </h2>
+<mat-divider></mat-divider><br>
+  <mat-expansion-panel hideToggle *ngFor =" let bookmark of this.tagspec" >
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{bookmark.name}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{bookmark.Category}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>
+  <button mat-icon-button color="{{findcolor(bookmark.favourite)}}" (click)="changestat(bookmark)"  matTooltip="Add to Favourites">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button  matTooltip="Edit" [routerLink]="['/update',bookmark._id]">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button  (click)="delete(bookmark); " matTooltip="Delete" onClick="window.location.reload();">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <button mat-icon-button cdkCopyToClipboard={{bookmark.Url}} matTooltip="Copy to Clipboard" (click)="clipboard()">
+      <mat-icon>file_copy</mat-icon>
+    </button>
+
+  <a href="{{bookmark.Url}}" target="_blank"><button mat-raised-button color="primary" >Visit Site</button></a>
+  </p>
+</mat-expansion-panel>

@@ -1,0 +1,26 @@
+.side-bar {
+    height: 100%;
+}
+
+.side{
+    width:12%;
+    height: 100%;
+}
+.side button{
+    width:100%;
+}
+.icon{
+position: relative;
+left:70px;
+top:10px;
+}
+.add{
+    position: relative;
+    left:40px;
+    top: -10px;
+}
+.toolbar{
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      
+}

@@ -1,0 +1,13 @@
+
+    <mat-grid-list cols="5" rowHeight="2:1"><div *ngFor =" let cat of categories">
+      <mat-grid-tile>
+        <button mat-icon-button [routerLink]="['/cat',cat.item]">
+          <mat-icon aria-setsize="50px">folder</mat-icon>
+        </button>
+          <strong class="title"><h3>{{cat.item}}&nbsp;</h3></strong>
+      </mat-grid-tile></div>
+     
+    </mat-grid-list>
+
+  
+    

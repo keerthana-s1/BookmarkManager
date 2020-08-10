@@ -1,0 +1,9 @@
+.card {
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:10%;
+    left:40%;
+    margin-right: -50%;
+    width:200px;
+}

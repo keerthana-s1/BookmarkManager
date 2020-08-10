@@ -1,0 +1,12 @@
+.card{
+    position: relative;
+    left:25px;
+    width: 300px;
+    top:30px;
+    
+}
+
+.cancel{
+    position: relative;
+    left: 20px;
+}

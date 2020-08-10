@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="toolbar">
+
+  
+  <div >
+  <button type="button" mat-button >
+  <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+  </button>
+</div>
+  <span>Bookmark Manager</span>
+  <span style="flex: 0.95 1 auto"></span>
+  <button mat-raised-button *ngIf="!authService.isAuthenticated" routerLink="/register" >Register</button>&nbsp;  
+  <button mat-raised-button *ngIf="!authService.isAuthenticated" routerLink="/login" >Login</button>
+  <button mat-raised-button *ngIf="authService.isAuthenticated" (click)="authService.logout()" routerLink="/login"  >Logout</button>
+</mat-toolbar>
+<br> 
+<button class="add" *ngIf="authService.isAuthenticated" mat-raised-button color="primary" routerLink="/new">Add New</button><br>
+<mat-drawer-container  class="side-bar">
+  <mat-drawer class="side" mode="side" *ngIf="authService.isAuthenticated" opened><br>
+    <button mat-button color="primary" routerLink='/all'><h3>All</h3></button><br>
+    <button mat-button color="primary" routerLink='/cat'><h3>Categories</h3></button><br>
+    <button mat-button color="primary" routerLink='/tag'><h3>Tags</h3></button><br>
+    <button mat-button color="primary" routerLink='/fav' ><h3>Favourites</h3></button><br>
+
+
+  </mat-drawer>
+  <mat-drawer-content> <router-outlet></router-outlet></mat-drawer-content>
+  </mat-drawer-container>
+
+
+  
+      

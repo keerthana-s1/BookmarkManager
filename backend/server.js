@@ -98,6 +98,13 @@ app.get('/fav',checkAuthenticated,async (req,res) => {
 
 })
 
+app.get('/favfromext',async (req,res) => {
+    var fbms = await Bookmark.find({ favourite:true} )
+    console.log(fbms)
+    res.send(fbms)
+
+})
+
 app.get('/users',checkAuthenticated, async (req,res) => {
     try{
         console.log(req.userId)
@@ -151,6 +158,19 @@ app.post('/newBM',checkAuthenticated, (req,res) => {
     console.log(bookmark)
     bookmark.save( (err, result) => {
     console.log(bookmark)     
+    })
+    
+})
+
+app.post('/newBMfromext', (req,res) => {
+    //req.body.OwnerID = req.userId
+    console.log(req.body)
+    var BMData = req.body;
+    var bookmark = new Bookmark (BMData)
+    //bookmark.OwnerID = req.userId
+   // console.log(bookmark)
+    bookmark.save( (err, result) => {
+   // console.log(bookmark)     
     })
     
 })

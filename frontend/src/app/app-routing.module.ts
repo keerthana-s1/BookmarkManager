@@ -14,6 +14,8 @@ import {CatSpecComponent} from './catspec.component'
 import {TagComponent} from './tag.component'
 import {TagSpecComponent} from './tagspec.component'
 import {UpdateComponent } from './update.component'
+import {SingleComponent} from './single.component'
+import {PrivComponent} from './priv.component'
 const routes: Routes = [
   {
     path:'register' , component: RegisterComponent
@@ -48,6 +50,12 @@ const routes: Routes = [
   },
   {
     path:'update/:id',component:UpdateComponent
+  },
+  {
+    path:'name/:id',component:SingleComponent
+  },
+  {
+    path:'priv',component:PrivComponent
   }
 ];
 

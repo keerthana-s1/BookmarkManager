@@ -38,6 +38,19 @@ export class TagSpecComponent {
       return "warn"
       else return "black"
   }
+  isprivate(bm) {
+    if(bm.private==true)
+    return true 
+    else return false
+  }
+  changevis(bm)
+  {   
+      console.log('trying to change')
+      bm.private = !bm.private
+      this.apiService.changeVisStat(bm)
+      
+      
+  }
   delete(data)
   {
     this.apiService.delBM(data)

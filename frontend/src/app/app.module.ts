@@ -26,6 +26,7 @@ import {AuthInterceptorService } from './authinterceptor.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiService } from './api.service';
+import {SingleComponent} from './single.component'
 import {AuthService} from './auth.service'
 import {RegisterComponent} from './register.component'
 import {MessagesComponent} from './messages.component'
@@ -40,17 +41,19 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
+import { ReactiveFormsModule} from '@angular/forms';
 import {CatSpecComponent} from './catspec.component'
 import {MatGridListModule} from '@angular/material/grid-list';
 import { from } from 'rxjs';
 import {MatMenuModule} from '@angular/material/menu';
+import {PrivComponent} from './priv.component'
 
 
 @NgModule({
   declarations: [
     AppComponent, MessagesComponent,RegisterComponent,LoginComponent,UsersComponent,HomeComponent,
     NewBMComponent,AllComponent,FavComponent,CatComponent,CatSpecComponent,TagComponent,TagSpecComponent,
-    UpdateComponent
+    UpdateComponent,SingleComponent,PrivComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSlideToggleModule,
     MatChipsModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule
   ],
   
   providers: [ApiService,AuthService, {

@@ -13,17 +13,36 @@
   <button mat-raised-button *ngIf="authService.isAuthenticated" (click)="authService.logout()" routerLink="/login"  >Logout</button>
 </mat-toolbar>
 <br> 
-<button class="add" *ngIf="authService.isAuthenticated" mat-raised-button color="primary" routerLink="/new">Add New</button><br>
+<button class="add" *ngIf="authService.isAuthenticated" mat-raised-button color="primary" routerLink="/new">Add New</button>
+
+<form class="search" *ngIf="authService.isAuthenticated">
+  <mat-form-field >
+    <mat-label>Search</mat-label >
+    <input id="search" matInput [(ngModel)]="selected" name="Search" [matAutocomplete]="auto" [formControl]="myControl" >
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions |async " [value]="option" >
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+   
+    </mat-form-field><br>
+    <button mat-icon-button class="searchicon" [routerLink]="['/name/',selected]">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+  <br>
 <mat-drawer-container  class="side-bar">
   <mat-drawer class="side" mode="side" *ngIf="authService.isAuthenticated" opened><br>
     <button mat-button color="primary" routerLink='/all'><h3>All</h3></button><br>
     <button mat-button color="primary" routerLink='/cat'><h3>Categories</h3></button><br>
     <button mat-button color="primary" routerLink='/tag'><h3>Tags</h3></button><br>
     <button mat-button color="primary" routerLink='/fav' ><h3>Favourites</h3></button><br>
+    <button mat-button color="primary" routerLink='/priv' ><h3>Private</h3></button><br>
 
 
   </mat-drawer>
-  <mat-drawer-content> <router-outlet></router-outlet></mat-drawer-content>
+  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
   </mat-drawer-container>
 
 

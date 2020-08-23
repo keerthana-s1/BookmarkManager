@@ -16,7 +16,8 @@ export class NewBMComponent {
         Url:"",
         OwnerID: "",
         Category:"",
-        tags:[]
+        tags:[],
+        UserIP:""
     }
     visible = true;
   selectable = true;
@@ -30,6 +31,8 @@ export class NewBMComponent {
     this.apiService.getCat().subscribe(list => {
         this.categories = list
     })
+
+    
     
   }
 

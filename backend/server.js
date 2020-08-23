@@ -4,7 +4,7 @@ var BodyParser = require('body-parser')
 var Mongoose = require('mongoose')
 var jwt = require('jwt-simple')
 var app=express()
-
+var activeUser
 var User = require('./models/User.js')
 var Bookmark = require('./models/Bookmark.js')
 const { find } = require('./models/User.js')
@@ -18,7 +18,7 @@ app.use(cors())
 app.use(BodyParser.json())
 
 function checkAuthenticated(req,res,next)
-{
+{   console.log('here')
     if(!req.header('authorization'))
       return res.status(401).send({message:'Unauthorized '})
 
@@ -65,6 +65,7 @@ app.get('/tag', async (req,res) => {
 
 app.get('/cat/:id',checkAuthenticated, async (req,res) => {
     var data
+    console.log(activeUser)
     data = await Bookmark.find({OwnerID: req.userId, Category: req.params.id})
     console.log(data)
    res.send(data)  
@@ -84,9 +85,29 @@ app.get('/tag/:id',checkAuthenticated, async (req,res) => {
    res.send(data)  
 })
 
+app.get('/name/:id',checkAuthenticated, async (req,res) => {
+    var data
+    data = await Bookmark.find({OwnerID: req.userId, name:req.params.id })
+    console.log(data)
+   res.send(data)  
+})
+
+
 app.get('/all',checkAuthenticated,async (req,res) => {
+    activeUser = req.userId
     var bms = await Bookmark.find({ OwnerID : req.userId} )
     //console.log(bms)
+    res.send(bms)
+
+})
+
+app.get('/bmnames',checkAuthenticated,async (req,res) => {
+    var bms = await Bookmark.find({ OwnerID : req.userId} ).distinct('name')
+    var bmnames =[]
+    bms.forEach((item)=> {
+     bmnames.push(item.name)
+    })
+    console.log(bms)
     res.send(bms)
 
 })
@@ -97,10 +118,16 @@ app.get('/fav',checkAuthenticated,async (req,res) => {
     res.send(fbms)
 
 })
+app.get('/priv',checkAuthenticated,async (req,res) => {
+    var fbms = await Bookmark.find({ OwnerID : req.userId, private:true} )
+    console.log(fbms)
+    res.send(fbms)
+
+})
 
 app.get('/favfromext',async (req,res) => {
-    var fbms = await Bookmark.find({ favourite:true} )
-    console.log(fbms)
+    var fbms = await Bookmark.find({ favourite:true,private:false} )
+    //console.log(fbms)
     res.send(fbms)
 
 })
@@ -162,9 +189,12 @@ app.post('/newBM',checkAuthenticated, (req,res) => {
     
 })
 
-app.post('/newBMfromext', (req,res) => {
-    //req.body.OwnerID = req.userId
-    console.log(req.body)
+app.post('/newBMfromext/:id', async (req,res) => {
+    req.body.OwnerID = req.params.id
+   //console.log('new check',req.params.id)
+    owner =await User.findOne({email:req.body.id,password : req.body.password})
+   //console.log(owner)
+   req.body.OwnerID = owner._id
     var BMData = req.body;
     var bookmark = new Bookmark (BMData)
     //bookmark.OwnerID = req.userId
@@ -207,6 +237,27 @@ app.post('/change',checkAuthenticated, (req,res) => {
 })
     
 })
+
+
+app.post('/changevis',checkAuthenticated, (req,res) => {
+    //console.log(req.body)
+    Bookmark.findOne({ _id: req.body._id}, function(err, bookmark) {
+     if (err)
+     {
+     }
+     else
+     {  
+         bookmark.private = !bookmark.private;
+         bookmark.save(function (err) {
+             if (err)
+             {
+             }
+             res.send();
+         });
+     }
+ })
+     
+ })
 
 app.post('/delete',checkAuthenticated, (req,res) => {
     //console.log(req.body)

@@ -4,12 +4,12 @@ import {MatSnackBar} from '@angular/material/snack-bar'
 import {ActivatedRoute} from '@angular/router'
 
 @Component({
-  selector: 'catspec',
-  templateUrl: 'catspec.component.html',
+  selector: 'single',
+  templateUrl: 'single.component.html',
   styleUrls: ['catspec.component.css']
 })
-export class CatSpecComponent {
-    catspec 
+export class SingleComponent {
+    tagspec 
     name
   heartcolor = "black"
   panelOpenState = false;
@@ -18,9 +18,9 @@ export class CatSpecComponent {
   ngOnInit() {
     var id = this.route.snapshot.params.id
     this.name=id
-    this.apiService.getCatspecs(id).subscribe(res => {
-        this.catspec = res
-        console.log(this.catspec)
+    this.apiService.getSingle(id).subscribe(res => {
+        this.tagspec = res
+        console.log(this.tagspec)
     })
    //console.log(this.catspec)
   }
@@ -63,7 +63,5 @@ export class CatSpecComponent {
       duration: 2000,
     });
   }
-  post(){
-      console.log(this.catspec)
-  }
+ 
 }

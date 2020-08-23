@@ -19,6 +19,10 @@ import {MatSnackBar} from '@angular/material/snack-bar'
     <button mat-icon-button color="{{findcolor(bookmark.favourite)}}" (click)="changestat(bookmark)" aria-label="Example icon button with a heart icon">
         <mat-icon>favorite</mat-icon>
       </button>
+      <button mat-icon-button  (click)="changevis(bookmark)"  matTooltip="Change Visibility">
+        <mat-icon *ngIf="isprivate(bookmark)">lock</mat-icon>
+        <mat-icon *ngIf="!isprivate(bookmark)">lock_open</mat-icon>
+      </button>
       <button mat-icon-button  matTooltip="Edit" [routerLink]="['/update',bookmark._id]">
       <mat-icon>edit</mat-icon>
     </button>
@@ -54,6 +58,19 @@ export class FavComponent {
       if(stat)
       return "warn"
       else return "black"
+  }
+  isprivate(bm) {
+    if(bm.private==true)
+    return true 
+    else return false
+  }
+  changevis(bm)
+  {   
+      console.log('trying to change')
+      bm.private = !bm.private
+      this.apiService.changeVisStat(bm)
+      
+      
   }
   delete(data)
   {

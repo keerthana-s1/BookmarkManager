@@ -7,9 +7,13 @@ export  class ApiService {
     users
     bookmarks
     favbookmarks
+    privbookmarks
     categories
     catspec
+    ip
     constructor(private http: HttpClient) {}
+
+    
 
     getMessages() {
         this.http.get('http://localhost:3000/posts').subscribe(res => {
@@ -21,8 +25,9 @@ export  class ApiService {
     getBMs() {
         this.http.get('http://localhost:3000/all').subscribe(res => {
             this.bookmarks= res
-            console.log(this.bookmarks)
+        
         })
+        
     }
 
     getFavBMs() {
@@ -32,10 +37,17 @@ export  class ApiService {
         })
     }
 
+    getPrivBMs() {
+       return this.http.get('http://localhost:3000/priv')
+    }
+
     getCat() {
        return this.http.get('http://localhost:3000/cat')
     }
 
+    getBMnames() {
+        return this.http.get('http://localhost:3000/bmnames')
+     }
     getTag() {
         return this.http.get('http://localhost:3000/tag')
      }
@@ -50,6 +62,9 @@ export  class ApiService {
 
      getTagspecs(id) {
         return this.http.get('http://localhost:3000/tag/'+ id )
+    }
+    getSingle(id) {
+        return this.http.get('http://localhost:3000/name/'+ id )
     }
 
     getUsers() {
@@ -78,6 +93,13 @@ export  class ApiService {
 
      changeStat(BMdata) {
         this.http.post<any>('http://localhost:3000/change',BMdata).subscribe(res => {
+             console.log(res)
+             //localStorage.setItem(this.TOKEN_KEY,res.token)
+         })
+     }
+
+     changeVisStat(BMdata) {
+        this.http.post<any>('http://localhost:3000/changevis',BMdata).subscribe(res => {
              console.log(res)
              //localStorage.setItem(this.TOKEN_KEY,res.token)
          })

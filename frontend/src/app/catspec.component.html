@@ -13,6 +13,10 @@
   <button mat-icon-button color="{{findcolor(bookmark.favourite)}}" (click)="changestat(bookmark)"  matTooltip="Add to Favourites">
       <mat-icon>favorite</mat-icon>
     </button>
+    <button mat-icon-button  (click)="changevis(bookmark)"  matTooltip="Change Visibility">
+      <mat-icon *ngIf="isprivate(bookmark)">lock</mat-icon>
+      <mat-icon *ngIf="!isprivate(bookmark)">lock_open</mat-icon>
+    </button>
     <button mat-icon-button  matTooltip="Edit" [routerLink]="['/update',bookmark._id]">
       <mat-icon>edit</mat-icon>
     </button>

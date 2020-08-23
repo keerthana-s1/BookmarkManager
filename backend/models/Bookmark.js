@@ -8,10 +8,14 @@ module.exports = mongoose.model('Bookmark' , {
     favourite : {
        type: Boolean,
        default:false
-    },
+    },private : {
+        type: Boolean,
+        default:false
+     },
     tags:[{
         tag:{
             type:String
         }
-    }]
+    }],
+    UserIP: String
 })

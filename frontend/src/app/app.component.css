@@ -1,7 +1,17 @@
 .side-bar {
     height: 100%;
 }
-
+.search {
+    position: relative;
+    left:200px;
+    top: -50px;
+    height: 10px;
+}
+.searchicon{
+    position: relative;
+    left:200px;
+    top:-50px
+}
 .side{
     width:12%;
     height: 100%;
